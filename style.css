@@ -58,3 +58,13 @@ button:hover {
   grid-row: 4/6;
   height: 100%;
 }
+
+/* A PARTIR DAQUI JA É A DIV DE CONTEÚDO ESQUERDA*/
+
+.esquerda {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  gap: 10px;
+  display: none;
+}
