@@ -11,15 +11,6 @@ function back() {
   const display = document.querySelector("#display");
   display.value = display.value.slice(0, -1);
 }
-// Função logica de Calculo
-function result() {
-  const display = document.querySelector("#display");
-  try {
-    display.value = eval(display.value);
-  } catch {
-    display.value = "ERROR";
-  }
-}
 
 document.addEventListener("keydown", function (event) {
   const display = document.querySelector("#display");
@@ -38,3 +29,38 @@ document.addEventListener("keydown", function (event) {
     clean();
   }
 });
+// Função logica de Calculo
+function result() {
+  let calcular = document.querySelector("#display").value;
+
+  let numeros = calcular.split(/[\+\-\*\/]/).map(Number);
+  let operator = calcular.match(/[\+\-\*\/]/g) || [];
+
+  for (let i = 0; i < operator.length; ) {
+    if (operator[i] === "*" || operator[i] === "/") {
+      let resultado;
+
+      if (operator[i] === "*") {
+        resultado = numeros[i] * numeros[i + 1];
+      } else {
+        resultado = numeros[i] / numeros[i + 1];
+      }
+
+      numeros.splice(i, 2, resultado);
+      operator.splice(i, 1);
+    } else {
+      i++;
+    }
+  }
+
+  let resultado = numeros[0];
+  for (let i = 0; i < operator.length; i++) {
+    if (operator[i] === "+") {
+      resultado += numeros[i + 1];
+    } else if (operator[i] === "-") {
+      resultado -= numeros[i + 1];
+    }
+  }
+
+  document.querySelector("#display").value = resultado;
+}
